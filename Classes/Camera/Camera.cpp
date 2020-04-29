@@ -28,6 +28,7 @@ glm::mat4 Camera::GetViewMatrix() {
 
 void Camera::processKeyboard(Camera_Movement movement, float deltaTime)
 {
+	updateCameraVectors();
 	float velocity = speed * deltaTime;
 
 	if (movement == LEFT)
@@ -44,9 +45,14 @@ void Camera::processKeyboard(Camera_Movement movement, float deltaTime)
 
 	if (movement == DOWNWARD)
 		position -= upVector * velocity;
-	if (movement == ROTATE_LEFT)
-		position -= upVector * velocity;
-
+	if (movement == ROTATE_LEFT) {
+		yaw -= 0.05;
+		direction.x = cos(glm::radians(yaw)); // Note that we convert the angle to radians first
+	}
+	if (movement == ROTATE_RIGHT) {
+		yaw += 0.05;
+		direction.x = cos(glm::radians(yaw)); // Note that we convert the angle to radians first
+	}
 
 }
 
@@ -84,9 +90,9 @@ void Camera::processMouseScroll(float offset)
 void Camera::updateCameraVectors()
 {
 	// Calculate the new Front vector
-	direction.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction.y = sin(glm::radians(pitch));
-	direction.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction = glm::normalize(direction);
 
 	// Also re-calculate the Right and Up vector
