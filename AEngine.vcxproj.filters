@@ -33,10 +33,14 @@
     <ClCompile Include="Utility\Utility_OpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Light\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Light\Ambiant_Light\Ambiant_Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="firstVertex.glsl" />
-    <None Include="firstFragment.glsl" />
     <None Include="Dependencies\OpenGL\includes\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -370,20 +374,11 @@
     <None Include="Dependencies\OpenGL\includes\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include=".gitignore" />
+    <None Include="Shaders\firstFragment.glsl" />
+    <None Include="Shaders\firstVertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utility_OpenGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dependencies\OpenGL\includes\glad\glad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -831,16 +826,17 @@
     <ClInclude Include="Utility\Utility_OpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="container.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="kenbogard.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="awesomeface.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="Classes\Light\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Light\Ambiant_Light\Ambiant_Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Camera\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Shader\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,7 +11,9 @@ enum Camera_Movement {
 	UPWARD,
 	DOWNWARD,
 	ROTATE_LEFT,
-	ROTATE_RIGHT
+	ROTATE_RIGHT,
+	ROTATE_UP, 
+	ROTATE_DOWN
 };
 
 

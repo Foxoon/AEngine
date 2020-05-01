@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Camera\Camera.cpp" />
+    <ClCompile Include="Classes\Light\Ambiant_Light\Ambiant_Light.cpp" />
+    <ClCompile Include="Classes\Light\Light.cpp" />
     <ClCompile Include="Classes\Shader\Shader.cpp" />
     <ClCompile Include="Dependencies\OpenGL\includes\glad.c" />
     <ClCompile Include="Dependencies\OpenGL\includes\glm\detail\glm.cpp" />
@@ -157,6 +159,7 @@
     <ClCompile Include="Utility\Utility_OpenGL.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="Dependencies\OpenGL\includes\glm\detail\func_common.inl" />
     <None Include="Dependencies\OpenGL\includes\glm\detail\func_common_simd.inl" />
     <None Include="Dependencies\OpenGL\includes\glm\detail\func_exponential.inl" />
@@ -268,11 +271,14 @@
     <None Include="Dependencies\OpenGL\includes\glm\gtx\vector_angle.inl" />
     <None Include="Dependencies\OpenGL\includes\glm\gtx\vector_query.inl" />
     <None Include="Dependencies\OpenGL\includes\glm\gtx\wrap.inl" />
-    <None Include="firstVertex.glsl" />
-    <None Include="firstFragment.glsl" />
+    <None Include="Shaders\firstFragment.glsl" />
+    <None Include="Shaders\firstVertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Classes\Camera\Camera.h" />
+    <ClInclude Include="Classes\Light\Ambiant_Light\Ambiant_Light.h" />
+    <ClInclude Include="Classes\Light\Light.h" />
+    <ClInclude Include="Classes\Shader\Shader.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\glad\glad.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\GLFW\glfw3.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\GLFW\glfw3native.h" />
@@ -421,15 +427,7 @@
     <ClInclude Include="Dependencies\OpenGL\includes\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\OpenGL\includes\glm\vector_relational.hpp" />
     <ClInclude Include="Dependencies\OpenGL\includes\KHR\khrplatform.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Utility\Utility_OpenGL.h" />
-    <ClInclude Include="Utility_OpenGL.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="awesomeface.png" />
-    <Image Include="container.jpg" />
-    <Image Include="kenbogard.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

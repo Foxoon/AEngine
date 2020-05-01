@@ -18,7 +18,7 @@
 #include "Utility/Utility_OpenGL.h"
 #include "Classes/Shader/Shader.h"
 #include "Classes/Camera/Camera.h"
-
+#include "Classes/Light/Light.h"
 
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -50,6 +50,7 @@ float lastY = SCREEN_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 Camera* camera = new Camera();
+
 
 int main()
 {
@@ -288,7 +289,7 @@ void processInput(GLFWwindow *window)
 {
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		//glfwSetWindowShouldClose(window, true);
+		glfwSetWindowShouldClose(window, true);
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera->processKeyboard(FORWARD, deltaTime);
@@ -305,7 +306,7 @@ void processInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 		camera->processKeyboard(UPWARD, deltaTime);
 
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
 		camera->processKeyboard(DOWNWARD, deltaTime);
 
 
@@ -314,6 +315,13 @@ void processInput(GLFWwindow *window)
 	
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 		camera->processKeyboard(ROTATE_RIGHT, deltaTime);
+
+
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+		camera->processKeyboard(ROTATE_UP, deltaTime);
+
+	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
+		camera->processKeyboard(ROTATE_DOWN, deltaTime);
 
 }
 
