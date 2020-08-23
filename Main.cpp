@@ -27,6 +27,8 @@
 using namespace std;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+//keycallback
+
 void processInput(GLFWwindow *window);
 void mouse_callback(GLFWwindow* window, double x, double y);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -38,11 +40,10 @@ const unsigned int SCREEN_HEIGHT = 600;
 
 //urlPath
 const std::string shaderPath = "Shaders/";
-
-
-// ---------   PROGRAM  -------------
+// ---------  Time variables  -------------
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
+
 float lastX = SCREEN_WIDTH / 2.0f;
 float lastY = SCREEN_HEIGHT / 2.0f;
 
@@ -79,20 +80,29 @@ int main()
 
 	//focus on the window
 	glfwMakeContextCurrent(window);
+
+	//Initialize GLAD  ---------------------------------------
+// load all OpenGL function pointers
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return -1;
+	}
+	//here
+	//glfwSetKeyCallback(window, key_callback); **
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
-	//Initialize GLAD  ---------------------------------------
-	// load all OpenGL function pointers
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
+	// OpenGL Configuration
+	// glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); **
 	glEnable(GL_DEPTH_TEST);
+	// glBlendFunct(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); **
+
+
+
 
 	// build and compile our shader Program
 

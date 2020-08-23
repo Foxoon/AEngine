@@ -2,6 +2,7 @@
 
 
 
+
 Camera::Camera()
 {
 	position = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -31,14 +32,23 @@ void Camera::processKeyboard(Camera_Movement movement, float deltaTime)
 	updateCameraVectors();
 	float velocity = speed * deltaTime;
 
-	if (movement == LEFT)
+	if (movement == LEFT) {
 		position -= right * velocity;
-	if (movement == RIGHT)
+		position.y = 0;
+	}
+		
+	if (movement == RIGHT) {
 		position += right * velocity;
-	if (movement == FORWARD)
+		position.y = 0;
+	}
+	if (movement == FORWARD) {
 		position += direction * velocity;
-	if (movement == BACKWARD)
+		position.y = 0;
+	}
+	if (movement == BACKWARD) {
 		position -= direction * velocity;
+		position.y = 0;
+	}
 
 	if (movement == UPWARD)
 		position += upVector * velocity;
@@ -102,8 +112,6 @@ void Camera::updateCameraVectors()
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction = glm::normalize(direction);
-
-
 
 	// Also re-calculate the Right and Up vector
 	right = glm::normalize(glm::cross(direction, upVector));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
