@@ -101,26 +101,16 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	// glBlendFunct(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); **
 
-
-
-
 	// build and compile our shader Program
-
-	// ------------------------------------
 	std::string vertexPathstr = shaderPath + "firstVertex.glsl";
 	std::string fragPathstr = shaderPath + "firstFragment.glsl";
 	const char* vertexPath = vertexPathstr.c_str();
 	const char* fragPath = fragPathstr.c_str();
 
-
 	Shader ourShader(vertexPath, fragPath);
 
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
-	// ------------------------------------------------------------------
-
-
-
 	float vertices[] = {
 		//face 1
 		0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
@@ -240,10 +230,7 @@ int main()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-
-
 		//  ---------- render
-		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
