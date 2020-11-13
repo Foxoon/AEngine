@@ -15,23 +15,25 @@
 
 
 #include <iostream>
-#include "Utility/Utility_OpenGL.h"
+
+#ifndef UTILITY
+#define UTILITY
+#include "Classes/Utility/Utility_OpenGL.h";
+#endif
+
+
 #include "Classes/Shader/Shader.h"
 #include "Classes/Camera/Camera.h"
 #include "Classes/Light/Light.h"
-
+#include "Classes/Controls/DControls.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "Dependencies/stb/stb_image.h"
-
 using namespace std;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-//keycallback
 
-void processInput(GLFWwindow *window);
-void mouse_callback(GLFWwindow* window, double x, double y);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void mouseCursorPosWrapper(GLFWwindow* window, double x, double y);
+void mouseScrollWrapper(GLFWwindow* window, double x, double y);
 
 
 // settings
@@ -44,62 +46,24 @@ const std::string shaderPath = "Shaders/";
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
 
-float lastX = SCREEN_WIDTH / 2.0f;
-float lastY = SCREEN_HEIGHT / 2.0f;
 
-
-bool firstMouse = true;
-
+	//move this 2 lines above main//
 Camera* camera = new Camera();
+
+static DControls* controls = new DControls(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
+
+
 
 
 int main()
 {
+	GLFWwindow* window = initWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	glfwSetCursorPosCallback(window, mouseCursorPosWrapper);
+	glfwSetScrollCallback(window, mouseScrollWrapper);
 
-	// Intialize GLFW  ---------------------------------------
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	//tells to use the core profile:smaller subset of openGL features
-	//such as no backward compatibility
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-#ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
 
-	// Create window object 
-	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "LearnOpenGL", NULL, NULL);
-	if (window == NULL)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	//focus on the window
-	glfwMakeContextCurrent(window);
-
-	//Initialize GLAD  ---------------------------------------
-// load all OpenGL function pointers
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
-	//here
-	//glfwSetKeyCallback(window, key_callback); **
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetCursorPosCallback(window, mouse_callback);
-	glfwSetScrollCallback(window, scroll_callback);
-
-	// OpenGL Configuration
-	// glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); **
-	glEnable(GL_DEPTH_TEST);
-	// glBlendFunct(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); **
 
 	// build and compile our shader Program
 	std::string vertexPathstr = shaderPath + "firstVertex.glsl";
@@ -114,9 +78,11 @@ int main()
 	float vertices[] = {
 		//face 1
 		0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+
+
 		-0.5f, 0.0f, -0.5f, 0.0f, 0.0f,
 		0.5f, 0.0f, -0.5f, 1.0f, 0.0f,
-
+		 
 		//face 2
 		0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 		0.5f, 0.0f, -0.5f, 1.0f, 0.0f,
@@ -145,12 +111,7 @@ int main()
 
 	};
 
-	/*
-	unsigned int indices[] = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
-	};
-	*/
+
 
 
 	//declaration Buffer and array objects
@@ -222,7 +183,7 @@ int main()
 	{
 		// input
 
-		processInput(window);
+		controls->processInput(window);
 		// -----
 
 		//per frame  tick
@@ -277,83 +238,19 @@ int main()
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	// ------------------------------------------------------------------
 	glfwTerminate();
+	
 	return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
-{
-
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
-
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera->processKeyboard(FORWARD, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera->processKeyboard(BACKWARD, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera->processKeyboard(LEFT, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera->processKeyboard(RIGHT, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		camera->processKeyboard(UPWARD, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-		camera->processKeyboard(DOWNWARD, deltaTime);
-
-
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		camera->processKeyboard(ROTATE_LEFT, deltaTime);
-	
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		camera->processKeyboard(ROTATE_RIGHT, deltaTime);
-
-
-	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-		camera->processKeyboard(ROTATE_UP, deltaTime);
-
-	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
-		camera->processKeyboard(ROTATE_DOWN, deltaTime);
-
-}
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and
-	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, width, height);
-}
-
-void mouse_callback(GLFWwindow* window, double x, double y) {
-
-
-	if (firstMouse) // this bool variable is initially set to true
-	{
-		lastX = x;
-		lastY = y;
-		firstMouse = false;
+void mouseCursorPosWrapper(GLFWwindow* window, double x, double y) {
+	if (controls) {
+		controls->mouse_callback(window, x, y);
 	}
-
-	float xoffset = x - lastX;
-	float yoffset = lastY - y; // reversed since y-coordinates range from bottom to top
-	lastX = x;
-	lastY = y;
-
-	camera->processMouseMovement(xoffset, yoffset);
-
-
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	camera->processMouseScroll(yoffset);
+void mouseScrollWrapper(GLFWwindow* window, double x, double y) {
+	if (controls) {
+		controls->scroll_callback(window, y);
+	}
 }
-
 

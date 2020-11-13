@@ -1,5 +1,4 @@
 #pragma once
-#include "../../Utility/Utility_OpenGL.h"
 #include <glm/vec3.hpp> // glm::vec3
 
 class Light

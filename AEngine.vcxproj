@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{B6F15626-84CA-4183-8A0E-29036B2651A8}</ProjectGuid>
     <RootNamespace>OpenGLTutorial</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -152,11 +152,19 @@
     <ClCompile Include="Classes\Camera\Camera.cpp" />
     <ClCompile Include="Classes\Light\Ambiant_Light\Ambiant_Light.cpp" />
     <ClCompile Include="Classes\Light\Light.cpp" />
+    <ClCompile Include="Classes\MassSpring\myMassSpring.cpp" />
+    <ClCompile Include="Classes\Particle\myParticle.cpp" />
     <ClCompile Include="Classes\Shader\Shader.cpp" />
+    <ClCompile Include="Classes\Controls\DControls.cpp" />
+    <ClCompile Include="Classes\Shapes\Cube\Cube.cpp" />
+    <ClCompile Include="Classes\Shapes\Sphere\mySphere.cpp" />
+    <ClCompile Include="Classes\Spring\mySpring.cpp" />
     <ClCompile Include="Dependencies\OpenGL\includes\glad.c" />
     <ClCompile Include="Dependencies\OpenGL\includes\glm\detail\glm.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Utility\Utility_OpenGL.cpp" />
+    <ClCompile Include="Classes\Utility\Utility_OpenGL.cpp" />
+    <ClCompile Include="Classes\Shapes\Shape.cpp" />
+    <ClCompile Include="Classes\Shapes\Plane\Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -276,9 +284,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Camera\Camera.h" />
+    <ClInclude Include="Classes\configuration.h" />
     <ClInclude Include="Classes\Light\Ambiant_Light\Ambiant_Light.h" />
     <ClInclude Include="Classes\Light\Light.h" />
+    <ClInclude Include="Classes\MassSpring\myMassSpring.h" />
+    <ClInclude Include="Classes\Particle\myParticle.h" />
     <ClInclude Include="Classes\Shader\Shader.h" />
+    <ClInclude Include="Classes\Controls\DControls.h" />
+    <ClInclude Include="Classes\Shapes\Cube\Cube.h" />
+    <ClInclude Include="Classes\Shapes\Sphere\mySphere.h" />
+    <ClInclude Include="Classes\Spring\mySpring.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\glad\glad.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\GLFW\glfw3.h" />
     <ClInclude Include="Dependencies\OpenGL\includes\GLFW\glfw3native.h" />
@@ -427,7 +442,8 @@
     <ClInclude Include="Dependencies\OpenGL\includes\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\OpenGL\includes\glm\vector_relational.hpp" />
     <ClInclude Include="Dependencies\OpenGL\includes\KHR\khrplatform.h" />
-    <ClInclude Include="Utility\Utility_OpenGL.h" />
+    <ClInclude Include="Classes\Shapes\Shape.h" />
+    <ClInclude Include="Classes\Shapes\Plane\Plane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

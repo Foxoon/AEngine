@@ -1,11 +1,26 @@
 #pragma once
+
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 
-#include "../../Utility/Utility_OpenGL.h"
+
+enum Camera_Movement {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT,
+	UPWARD,
+	DOWNWARD,
+	ROTATE_LEFT,
+	ROTATE_RIGHT,
+	ROTATE_UP,
+	ROTATE_DOWN
+};
+
 class Camera
 {
 
